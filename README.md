@@ -125,4 +125,4 @@ MIT — free to use, modify, and share.
 
 💬 Contact
 Created by Your Name — aspiring Smart Contract Security Engineer.
- • 🔗 LinkedIn: https://linkedin.com/in/yourprofile](https://www.linkedin.com/in/maximilian-richter-40697a298/)
+ • 🔗 LinkedIn: www.linkedin.com/in/maximilian-richter-40697a298
