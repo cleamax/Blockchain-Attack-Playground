@@ -2,8 +2,8 @@
 pragma solidity ^0.8.24;
 
 import "forge-std/Test.sol";
-import "../contracts/Vulnerable.sol";
-import "../exploit/Attacker.sol";
+import "../contracts/Vulnerable.sol"; // BuggyBank
+import "../exploit/Attacker.sol";     // ArithmeticAttacker
 
 contract ArithmeticUnderflowTest is Test {
     BuggyBank bank;
@@ -25,7 +25,7 @@ contract ArithmeticUnderflowTest is Test {
         vm.prank(attackerEOA);
         attacker = new ArithmeticAttacker(bank);
 
-        // Give attacker EOA some ETH to forward to the contract if needed.
+        // Give attacker EOA some ETH (not strictly required, but handy for comparisons).
         vm.deal(attackerEOA, 2 ether);
     }
 
@@ -37,6 +37,7 @@ contract ArithmeticUnderflowTest is Test {
         attacker.attack{value: 0}(1 ether, 1 ether, 100);
 
         uint256 afterBal = address(bank).balance;
+
         assertLt(afterBal, before, "bank should be drained");
         assertGt(attackerEOA.balance, 2 ether, "attacker should profit in ETH");
     }
