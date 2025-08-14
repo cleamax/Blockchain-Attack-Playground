@@ -24,7 +24,7 @@ contract OracleManipulationTest is Test {
         amm = new SimpleAMM(tokenA, tokenB);
         pool = new LendingPool(tokenA, tokenB, amm);
 
-        // ⚠️ Dünne Liquidität, damit die Preismanipulation stark wirkt: 10 A : 10 B
+        // ⚠️ Low liquidity so that price manipulation has a strong effect: 10 A : 10 B
         tokenA.mint(liquidityProvider, 10 ether);
         tokenB.mint(liquidityProvider, 10 ether);
         vm.startPrank(liquidityProvider);
@@ -33,21 +33,21 @@ contract OracleManipulationTest is Test {
         amm.addLiquidity(10 ether, 10 ether);
         vm.stopPrank();
 
-        // Pool mit B füllen, damit etwas zu leihen da ist
+        // Fund the pool with B so there is something to borrow
         tokenB.mint(address(pool), 800 ether);
 
-        // Angreifer-Contract deployen (Owner = attackerEOA) und mit B + etwas A versorgen
+        // Deploy attacker contract (Owner = attackerEOA) and fund it with B + some A
         vm.startPrank(attackerEOA);
         attacker = new OracleAttacker(tokenA, tokenB, amm, pool);
-        tokenB.mint(address(attacker), 900 ether); // für Manipulation
-        tokenA.mint(address(attacker), 1 ether);   // kleines Collateral
+        tokenB.mint(address(attacker), 900 ether); // for manipulation
+        tokenA.mint(address(attacker), 1 ether);   // small collateral
         vm.stopPrank();
     }
 
     function testExploitOracleManipulation() public {
         uint256 poolBBefore = tokenB.balanceOf(address(pool));
 
-        // 900 B rein, 1 A als Collateral, 700 B leihen (sollte jetzt klappen)
+        // Deposit 900 B, 1 A as collateral, borrow 700 B (should now work)
         vm.prank(attackerEOA);
         attacker.execute(900 ether, 1 ether, 700 ether);
 
