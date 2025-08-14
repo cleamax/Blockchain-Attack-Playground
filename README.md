@@ -123,6 +123,7 @@ The CI workflow is defined in .github/workflows/ci.yml.
 📜 License
 MIT — free to use, modify, and share.
 
-💬 Contact
-Created by Your Name — aspiring Smart Contract Security Engineer.
- • 🔗 LinkedIn: www.linkedin.com/in/maximilian-richter-40697a298
+## 💬 Contact
+Created by **Maximilian Richter** — aspiring Smart Contract Security Engineer.  
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/maximilian-richter-40697a298)
