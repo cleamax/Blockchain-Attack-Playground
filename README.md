@@ -66,16 +66,13 @@ foundryup
 ```
 2) Clone the repository
 ```bash
-Copy
-Edit
 git clone https://github.com/YOUR_GITHUB_USERNAME/blockchain-attack-playground.git
 cd blockchain-attack-playground
 ```
 3) Run all tests
-bash
-Copy
-Edit
+```bash
 forge test -vv
+```
 🧪 Current Challenges
 ID	Name	Severity	Status
 01	Reentrancy Attack	Critical	✅ Done
