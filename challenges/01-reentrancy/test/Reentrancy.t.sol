@@ -9,7 +9,7 @@ contract ReentrancyTest is Test {
     SimpleBank bank;
     Attacker attacker;
     address user = address(0xBEEF);
-    address payable attackerEOA = payable(address(0xA11CE)); // bekommt am Ende das Geld
+    address payable attackerEOA = payable(address(0xA11CE)); // empfängt Profit
 
     function setUp() public {
         bank = new SimpleBank();
@@ -23,16 +23,17 @@ contract ReentrancyTest is Test {
         vm.prank(attackerEOA);
         attacker = new Attacker(bank);
 
-        // Dem Attacker-Contract 1 ETH gutschreiben UND als Attacker einzahlen
+        // Dem Attacker-Contract 1 ETH gutschreiben UND als Attacker einzahlen,
+        // damit balances[attacker] >= 1 ether ist (für den initialen Withdraw-Check)
         vm.deal(address(attacker), 1 ether);
-        vm.prank(address(attacker)); // msg.sender = attacker -> Balance wird dem Attacker gutgeschrieben
+        vm.prank(address(attacker)); // msg.sender = attacker
         bank.deposit{value: 1 ether}();
     }
 
     function testExploitDrainsBank() public {
         uint256 beforeBal = address(bank).balance;
 
-        // Start des Angriffs (zieht reentrancy-Schleife)
+        // Start des Angriffs
         attacker.attack(1 ether);
 
         uint256 afterBal = address(bank).balance;
