@@ -86,7 +86,7 @@ forge test -vv
 |-----|------|----------|--------|
 | 01  | [Reentrancy Attack](challenges/01-reentrancy/README.md) | Critical | ✅ Done |
 | 02  | [Access Control Flaw](challenges/02-access-control/README.md) | High | ✅ Done |
-| 03  | Price Oracle Manipulation | High | 🔄 WIP |
+| 03  | [Price Oracle Manipulation](challenges/03-price-oracle/README.md) | High | ✅ Done |
 | 04  | delegatecall Misuse | High | 🔄 WIP |
 | 05  | Arithmetic / Under/Overflow | Medium | 🔄 WIP |
 
