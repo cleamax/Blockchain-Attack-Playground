@@ -57,6 +57,8 @@ blockchain-attack-playground/
       └─ ci.yml                    # CI: forge test
 ```
 
+---
+
 ## 🚀 Getting Started
 
 ### 1) Install Foundry
@@ -64,68 +66,76 @@ blockchain-attack-playground/
 curl -L https://foundry.paradigm.xyz | bash
 foundryup
 ```
-2) Clone the repository
+
+### 2) Clone the repository
 ```bash
 git clone https://github.com/YOUR_GITHUB_USERNAME/blockchain-attack-playground.git
 cd blockchain-attack-playground
 ```
-3) Run all tests
+
+### 3) Run all tests
 ```bash
 forge test -vv
 ```
-🧪 Current Challenges
-ID	Name	Severity	Status
-01	Reentrancy Attack	Critical	✅ Done
-02	Access Control Flaw	High	🔄 WIP
-03	Price Oracle Manipulation	High	🔄 WIP
-04	delegatecall Misuse	High	🔄 WIP
-05	Arithmetic / Under/Overflow	Medium	🔄 WIP
 
-Each challenge folder contains: Vulnerable Code → Exploit → Tests → Fix Recommendations.
+---
 
-🧱 Tech Stack
-Solidity 0.8.x
+## 🧪 Current Challenges
+| ID  | Name                        | Severity | Status |
+|-----|-----------------------------|----------|--------|
+| 01  | Reentrancy Attack           | Critical | ✅ Done |
+| 02  | Access Control Flaw         | High     | 🔄 WIP |
+| 03  | Price Oracle Manipulation   | High     | 🔄 WIP |
+| 04  | `delegatecall` Misuse       | High     | 🔄 WIP |
+| 05  | Arithmetic / Under/Overflow | Medium   | 🔄 WIP |
 
-Foundry (forge, cast)
+> Each challenge folder contains: **Vulnerable Code → Exploit → Tests → Fix Recommendations**.
 
-Optional: Node.js for helper scripts
+---
 
-Linting/Formatting: solhint, prettier
+## 🧱 Tech Stack
+- **Solidity 0.8.x**
+- **Foundry** (forge, cast)
+- Optional: **Node.js** for helper scripts
+- Linting/Formatting: **solhint**, **prettier**
 
-🛡️ Security Best Practices Highlighted
-Checks-Effects-Interactions pattern
+---
 
-ReentrancyGuard & Pull-Payments
+## 🛡️ Security Best Practices Highlighted
+- Checks-Effects-Interactions pattern
+- `ReentrancyGuard` & Pull-Payments
+- Proper Role-Based Access Control (`onlyOwner` / roles)
+- Secure oracle design
+- Safe use of `delegatecall` & storage layouts
+- Safe arithmetic and edge case handling
 
-Proper Role-Based Access Control (onlyOwner / roles)
+---
 
-Secure oracle design
-
-Safe use of delegatecall & storage layouts
-
-Safe arithmetic and edge case handling
-
-➕ Adding a New Challenge (Quick Guide)
-Create a new folder under challenges/NN-name/
-
-Add contracts/Vulnerable.sol, exploit/…, test/…
-
-Write a README.md with: Story → Goal → Vulnerability → PoC Steps → Fix → References
-
-Run local tests with:
-
-bash
-Copy
-Edit
+## ➕ Adding a New Challenge (Quick Guide)
+1. Create a new folder under `challenges/NN-name/`
+2. Add `contracts/Vulnerable.sol`, `exploit/…`, `test/…`
+3. Write a `README.md` with: **Story → Goal → Vulnerability → PoC Steps → Fix → References**
+4. Run local tests with:
+```bash
 forge test -vv
-Commit and open a Pull Request
+```
+5. Commit and open a Pull Request
 
-🧰 Continuous Integration
-This repository uses GitHub Actions to run all Foundry tests on every push or pull request.
-The CI workflow is defined in .github/workflows/ci.yml.
+---
 
-📜 License
-MIT — free to use, modify, and share.
+## 🧰 Continuous Integration
+This repository uses GitHub Actions to run all Foundry tests on every push or pull request.  
+The CI workflow is defined in `.github/workflows/ci.yml`.
 
-💬 Contact
-Created by Maximilian Richter — aspiring Smart Contract Security Engineer.
+---
+
+## 📜 License
+**MIT** — free to use, modify, and share.
+
+---
+
+## 💬 Contact
+Created by **Maximilian Richter** — aspiring Smart Contract Security Engineer.  
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue?style=flat-square&logo=linkedin)](https://www.linkedin.com/in/maximilian-richter-40697a298)
+
