@@ -14,7 +14,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node.js (for linters)
+      # Nur für solhint & prettier
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -24,28 +25,24 @@ jobs:
         with:
           version: nightly
 
-      # 🔧 Make forge install reliable in Actions
-      - name: Prepare workspace for forge
+      # Forge-Setup robuster machen
+      - name: Prepare workspace
         run: |
           mkdir -p lib
           git config --global user.email "actions@github.com"
           git config --global user.name "GitHub Actions"
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
 
-      # 📦 Install forge-std and build
       - name: Install Foundry deps & build
         run: |
           forge --version
-          # install only if not already present
           if [ ! -d lib/forge-std ]; then
             forge install --no-commit foundry-rs/forge-std
           fi
           forge build
 
-      # 🔎 Linters
       - name: Install linters
-        run: |
-          npm install -g solhint prettier prettier-plugin-solidity
+        run: npm install -g solhint prettier prettier-plugin-solidity
 
       - name: Run solhint
         run: solhint 'challenges/**/*.sol'
@@ -53,11 +50,9 @@ jobs:
       - name: Run prettier check
         run: prettier --check 'challenges/**/*.sol'
 
-      # ✅ Tests
       - name: Run tests
         run: forge test -vv
 
-      # 📈 Coverage
       - name: Run coverage
         run: forge coverage --report lcov
 
@@ -68,6 +63,3 @@ jobs:
           path: lcov.info
           if-no-files-found: error
 
-          name: lcov.info
-          path: lcov.info
-          if-no-files-found: error
