@@ -56,6 +56,8 @@ blockchain-attack-playground/
 └─ .github/
    └─ workflows/
       └─ ci.yml                    # CI: forge test
+
+````
 🚀 Getting Started
 1) Install Foundry
 bash
@@ -126,7 +128,7 @@ MIT — free to use, modify, and share.
 
 ## 💬 Contact
 Created by **Maximilian Richter** — aspiring Smart Contract Security Engineer.
-````
+
 ## 💬 Contact
 Created by **Maximilian Richter** — aspiring Smart Contract Security Engineer.
 
