@@ -1,24 +1,62 @@
-name: CI
+name: CI (Build, Lint, Test, Coverage)
 
 on:
   push:
   pull_request:
-  workflow_dispatch:
+  workflow_dispatch: # erlaubt manuelles Starten im Actions-Tab
 
 jobs:
-  test:
+  ci:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      - uses: actions/checkout@v4
+    timeout-minutes: 15
 
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Node.js nur für solhint/prettier (Linting/Formatting)
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # Foundry installieren
       - name: Install Foundry
         uses: foundry-rs/foundry-toolchain@v1
         with:
           version: nightly
 
-      - name: Build
-        run: forge build
+      # Abhängigkeiten für Foundry-Projekte (forge-std) holen und bauen
+      - name: Install Foundry deps & build
+        run: |
+          forge --version
+          forge install --no-commit foundry-rs/forge-std
+          forge build
 
+      # Linters installieren
+      - name: Install linters
+        run: |
+          npm install -g solhint prettier prettier-plugin-solidity
+
+      # Solidity-Lint (bricht bei Fehlern ab)
+      - name: Run solhint
+        run: solhint 'challenges/**/*.sol'
+
+      # Format-Check (bricht bei Abweichungen ab)
+      - name: Run prettier check
+        run: prettier --check 'challenges/**/*.sol'
+
+      # Unit-Tests
       - name: Run tests
         run: forge test -vv
+
+      # Coverage erzeugen (LCOV) und als Artefakt hochladen
+      - name: Run coverage
+        run: forge coverage --report lcov
+
+      - name: Upload coverage artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: lcov.info
+          path: lcov.info
+          if-no-files-found: error
