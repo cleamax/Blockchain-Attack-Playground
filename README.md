@@ -57,19 +57,20 @@ blockchain-attack-playground/
       └─ ci.yml                    # CI: forge test
 ```
 
-🚀 Getting Started
-1) Install Foundry
-bash
-Copy
-Edit
+## 🚀 Getting Started
+
+### 1) Install Foundry
+```bash
 curl -L https://foundry.paradigm.xyz | bash
 foundryup
+```
 2) Clone the repository
-bash
+```bash
 Copy
 Edit
 git clone https://github.com/YOUR_GITHUB_USERNAME/blockchain-attack-playground.git
 cd blockchain-attack-playground
+```
 3) Run all tests
 bash
 Copy
@@ -114,8 +115,12 @@ Add contracts/Vulnerable.sol, exploit/…, test/…
 
 Write a README.md with: Story → Goal → Vulnerability → PoC Steps → Fix → References
 
-Run local tests with forge test -vv
+Run local tests with:
 
+bash
+Copy
+Edit
+forge test -vv
 Commit and open a Pull Request
 
 🧰 Continuous Integration
@@ -125,9 +130,5 @@ The CI workflow is defined in .github/workflows/ci.yml.
 📜 License
 MIT — free to use, modify, and share.
 
-
-## 💬 Contact
-Created by **Maximilian Richter** — aspiring Smart Contract Security Engineer.
-
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue?style=flat-square&logo=linkedin)](https://www.linkedin.com/in/maximilian-richter-40697a298)
-
+💬 Contact
+Created by Maximilian Richter — aspiring Smart Contract Security Engineer.
