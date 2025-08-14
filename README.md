@@ -155,8 +155,8 @@ These techniques are covered and demonstrated throughout the challenges in this 
 ## 💬 Contact
 Created by **Maximilian Richter** — aspiring Smart Contract Security Engineer.
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue?style=flat-square&logo=linkedin)](https://www.linkedin.com/in/maximilian-richter-40697a298)  
 📧 Email: maximilian.richter3@de.bosch.com  
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue?style=flat-square&logo=linkedin)](https://www.linkedin.com/in/maximilian-richter-40697a298)  
 [![GitHub](https://img.shields.io/badge/GitHub-cleamax-black?style=flat-square&logo=github)](https://github.com/cleamax)
 
 
