@@ -5,7 +5,7 @@
 [![CI](https://github.com/cleamax/Blockchain-Attack-Playground/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/cleamax/Blockchain-Attack-Playground/actions/workflows/ci.yml)
 ![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)
 ![Solidity](https://img.shields.io/badge/solidity-%5E0.8.x-blue?style=flat-square)
-
+ 
 ---
 
 ## 📖 About 
@@ -135,7 +135,7 @@ The CI workflow is defined in `.github/workflows/ci.yml`.
 ---
 
 ## 💬 Contact
-Created by **Maximilian Richter** — aspiring Smart Contract Security Engineer.  
+Created by **Maximilian Richter** — aspiring Smart Contract Security Engineer.   
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue?style=flat-square&logo=linkedin)](https://www.linkedin.com/in/maximilian-richter-40697a298)
 
