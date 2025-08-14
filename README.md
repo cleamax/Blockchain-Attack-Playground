@@ -126,5 +126,8 @@ MIT — free to use, modify, and share.
 ## 💬 Contact
 Created by **Maximilian Richter** — aspiring Smart Contract Security Engineer.
 ````
-<a href="https://www.linkedin.com/in/maximilian-richter-40697a298/"><img src="https://img.shields.io/badge/-LinkedIn-0072b1?&style=for-the-badge&logo=linkedin&logoColor=white" /></a>
+## 💬 Contact
+Created by **Maximilian Richter** — aspiring Smart Contract Security Engineer.
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue?style=flat-square&logo=linkedin)](https://www.linkedin.com/in/maximilian-richter-40697a298)
 
