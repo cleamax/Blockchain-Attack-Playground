@@ -127,3 +127,4 @@ MIT — free to use, modify, and share.
 Created by **Maximilian Richter** — aspiring Smart Contract Security Engineer.
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue?style=flat-square&logo=linkedin)](https://www.linkedin.com/in/maximilian-richter-40697a298)
+
