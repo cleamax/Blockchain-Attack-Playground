@@ -1,6 +1,6 @@
 # 🛡️ Blockchain Attack Playground
 
-**An open-source collection of vulnerable smart contracts, exploits, and professional-style security write-ups — built for learning, practicing, and showcasing blockchain security skills.**
+**An open-source collection of vulnerable smart contracts, exploits, and professional-style security write-ups — built for learning, practicing, and showcasing blockchain security skills.** 
 
 [![CI](https://github.com/cleamax/Blockchain-Attack-Playground/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/cleamax/Blockchain-Attack-Playground/actions/workflows/ci.yml)
 ![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)
