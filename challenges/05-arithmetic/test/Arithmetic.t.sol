@@ -41,6 +41,3 @@ contract ArithmeticUnderflowTest is Test {
         assertGt(attackerEOA.balance, 2 ether, "attacker should profit in ETH");
     }
 }
-markdown
-Copy
-Edit
