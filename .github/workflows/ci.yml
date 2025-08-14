@@ -1,4 +1,4 @@
-name: CI (Build, Lint, Test, Coverage)
+name: CI
 
 on:
   push:
