@@ -81,15 +81,16 @@ forge test -vv
 ---
 
 ## 🧪 Current Challenges
-| ID  | Name                        | Severity | Status |
-|-----|-----------------------------|----------|--------|
-| 01  | Reentrancy Attack           | Critical | ✅ Done |
-| 02  | Access Control Flaw         | High     | 🔄 WIP |
-| 03  | Price Oracle Manipulation   | High     | 🔄 WIP |
-| 04  | `delegatecall` Misuse       | High     | 🔄 WIP |
-| 05  | Arithmetic / Under/Overflow | Medium   | 🔄 WIP |
 
-> Each challenge folder contains: **Vulnerable Code → Exploit → Tests → Fix Recommendations**.
+| ID  | Name | Severity | Status |
+|-----|------|----------|--------|
+| 01  | [Reentrancy Attack](challenges/01-reentrancy/README.md) | Critical | ✅ Done |
+| 02  | [Access Control Flaw](challenges/02-access-control/README.md) | High | ✅ Done |
+| 03  | Price Oracle Manipulation | High | 🔄 WIP |
+| 04  | delegatecall Misuse | High | 🔄 WIP |
+| 05  | Arithmetic / Under/Overflow | Medium | 🔄 WIP |
+
+Each challenge folder contains: Vulnerable Code → Exploit → Tests → Fix Recommendations.
 
 ---
 
