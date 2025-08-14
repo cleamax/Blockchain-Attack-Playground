@@ -3,13 +3,5 @@
   "singleQuote": true,
   "trailingComma": "es5",
   "tabWidth": 4,
-  "overrides": [
-    {
-      "files": "*.sol",
-      "options": {
-        "parser": "solidity-parse",
-        "singleQuote": false
-      }
-    }
-  ]
+  "plugins": ["prettier-plugin-solidity"]
 }
