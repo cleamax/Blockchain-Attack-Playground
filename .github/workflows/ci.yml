@@ -22,7 +22,7 @@ jobs:
       - name: Install Foundry
         uses: foundry-rs/foundry-toolchain@v1
         with:
-          version: nightly   # alternativ: 'stable'
+          version: stable
 
       - name: Prepare workspace
         run: |
@@ -39,14 +39,31 @@ jobs:
           fi
           forge build
 
-      - name: Install linters
-        run: npm install -g solhint prettier prettier-plugin-solidity
+      # ---- Linting & Formatting (lokale Dev-Deps) ----
+      - name: Init Node project & install linters locally
+        run: |
+          test -f package.json || npm init -y
+          npm install --save-dev prettier prettier-plugin-solidity solhint
 
       - name: Prettier write (auto-fix)
-        run: prettier --write "challenges/**/*.sol"
+        run: npx prettier --write "challenges/**/*.sol"
 
       - name: Run solhint (soft)
-        run: solhint "challenges/**/*.sol" || true
+        run: npx solhint "challenges/**/*.sol" || true
 
       - name: Prettier check
-        run: prettier --check "cha
+        run: npx prettier --check "challenges/**/*.sol"
+
+      # ---- Tests & Coverage ----
+      - name: Run tests
+        run: forge test -vv
+
+      - name: Run coverage
+        run: forge coverage --report lcov
+
+      - name: Upload coverage artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: lcov.info
+          path: lcov.info
+          if-no-files-found: error
