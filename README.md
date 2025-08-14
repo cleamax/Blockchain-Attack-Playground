@@ -35,7 +35,7 @@ Each challenge includes:
 
 ## 📂 Project Structure
 
-```text
+text
 blockchain-attack-playground/
 ├─ README.md
 ├─ challenges/
