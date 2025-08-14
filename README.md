@@ -2,7 +2,7 @@
 
 **An open-source collection of vulnerable smart contracts, exploits, and professional-style security write-ups — built for learning, practicing, and showcasing blockchain security skills.**
 
-![CI](https://img.shields.io/github/actions/workflow/status/YOUR_GITHUB_USERNAME/blockchain-attack-playground/ci.yml?label=tests&style=flat-square)
+![CI](https://img.shields.io/github/actions/workflow/status/cleamax/blockchain-attack-playground/ci.yml?label=tests&style=flat-square)
 ![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)
 ![Solidity](https://img.shields.io/badge/solidity-%5E0.8.x-blue?style=flat-square)
 
