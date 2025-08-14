@@ -25,11 +25,12 @@ Each challenge includes:
 ---
 
 ## 🎯 Features
-- Multiple attack vectors: **Reentrancy**, **Access Control Flaws**, **Price Oracle Manipulation**, **delegatecall misuse**, **Arithmetic Errors**, **Front-Running/MEV**, and more
-- **CertiK-style write-ups** for every challenge
-- Fully reproducible **local test environment** with [Foundry](https://book.getfoundry.sh/)
-- **Continuous Integration**: all tests run automatically on every commit
-- Clear and maintainable folder structure — ideal as a **portfolio project**
+- Covers a wide range of **real-world blockchain vulnerabilities**: Reentrancy, Access Control flaws, Price Oracle manipulation, `delegatecall` misuse, arithmetic errors, front-running/MEV, and more
+- **Professional-style security write-ups** for each challenge, including vulnerability explanation, impact assessment, proof of concept, and mitigation
+- Fully reproducible **local testing environment** using [Foundry](https://book.getfoundry.sh/) — easy for anyone to run and verify
+- **Continuous Integration** setup with GitHub Actions to ensure all tests pass on every commit
+- Clear, modular folder structure that makes it easy to navigate, extend, or adapt for new attack vectors
+- Designed to serve as a **learning resource, practice lab, and portfolio project** for blockchain security roles
 
 ---
 
