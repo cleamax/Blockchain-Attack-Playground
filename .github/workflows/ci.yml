@@ -2,30 +2,23 @@ name: CI
 
 on:
   push:
-    branches: [ "main" ]
   pull_request:
-    branches: [ "main" ]
+  workflow_dispatch:
 
 jobs:
   test:
     runs-on: ubuntu-latest
     timeout-minutes: 10
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Install Foundry
         uses: foundry-rs/foundry-toolchain@v1
         with:
           version: nightly
 
-      # forge-std holen + bauen
-      - name: Install dependencies
-        run: |
-          forge --version
-          forge install --no-commit foundry-rs/forge-std
-          forge build
+      - name: Build
+        run: forge build
 
       - name: Run tests
         run: forge test -vv
