@@ -25,16 +25,16 @@ contract ArithmeticUnderflowTest is Test {
         vm.prank(attackerEOA);
         attacker = new ArithmeticAttacker(bank);
 
-        // Give attacker EOA some ETH (not strictly required, but handy for comparisons).
-        vm.deal(attackerEOA, 2 ether);
+        // Fund attacker EOA so they can send the initial deposit into the attack contract.
+        vm.deal(attackerEOA, 3 ether);
     }
 
     function testExploitArithmeticUnderflow() public {
         uint256 before = address(bank).balance;
 
-        // Execute: deposit 1 ETH then withdraw 1 ETH per call until drained.
+        // Call attack as attackerEOA, sending the initial deposit along with the call.
         vm.prank(attackerEOA);
-        attacker.attack{value: 0}(1 ether, 1 ether, 100);
+        attacker.attack{value: 1 ether}(1 ether, 1 ether, 100);
 
         uint256 afterBal = address(bank).balance;
 
