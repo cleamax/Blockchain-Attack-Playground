@@ -130,6 +130,23 @@ The CI workflow is defined in `.github/workflows/ci.yml`.
 
 ---
 
+## 🛡️ How to Prevent These Attacks
+
+While this project focuses on exploiting vulnerabilities for educational purposes, it’s equally important to know how to **prevent** them in real-world smart contracts.  
+Some common best practices include:
+
+- Following the **Checks-Effects-Interactions** pattern  
+- Using **ReentrancyGuard** or pull-payment mechanisms  
+- Implementing proper **role-based access control** (e.g., `onlyOwner`, AccessControl)  
+- Validating and sanitizing all **external input**  
+- Using **secure oracles** and verifying price feeds  
+- Avoiding unsafe low-level calls (`delegatecall`, `call`) unless absolutely necessary  
+- Leveraging **static analysis tools** and audits before deployment  
+
+These techniques are covered and demonstrated throughout the challenges in this repository.
+
+---
+
 ## 📜 License
 **MIT** — free to use, modify, and share.
 
