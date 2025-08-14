@@ -13,12 +13,14 @@ contract SimpleBank {
     function withdraw(uint256 amount) external {
         require(balances[msg.sender] >= amount, "insufficient");
 
-        // ❌ CEI-Verstoß: externe Interaktion VOR dem State-Update
-        // Ignoriere den Rückgabewert, damit keine Reverts die Kaskade abbrechen.
-        (bool /*ok*/, ) = msg.sender.call{value: amount}("");
+        // ❌ CEI-Verstoß: externe Interaktion VOR dem State-Update.
+        // Rückgabewert wird absichtlich ignoriert (kein require), damit die
+        // Reentrancy-Kaskade nicht an einem fehlgeschlagenen send abbricht.
+        (bool success, ) = payable(msg.sender).call{value: amount}("");
+        // success wird hier nicht ausgewertet – absichtlich für die Challenge.
 
-        // ❌ In Solidity >=0.8 würde die mehrfache Subtraktion sonst revertieren.
-        // Für die Challenge erlauben wir Wrap-around (Demozweck).
+        // ❌ In Solidity >=0.8 würde mehrfache Subtraktion sonst revertieren.
+        // Für die Demo erlauben wir Wrap-around.
         unchecked {
             balances[msg.sender] -= amount;
         }
