@@ -9,7 +9,7 @@ contract ReentrancyTest is Test {
     SimpleBank bank;
     Attacker attacker;
     address user = address(0xBEEF);
-    address payable attackerEOA = payable(address(0xA11CE)); // empfängt Profit
+    address payable attackerEOA = payable(address(0xA11CE)); // receives profit
 
     function setUp() public {
         bank = new SimpleBank();
@@ -19,12 +19,12 @@ contract ReentrancyTest is Test {
         vm.prank(user);
         bank.deposit{value: 5 ether}();
 
-        // Attacker-Contract deployen; Owner = attackerEOA
+        // Deploy attacker contract; Owner = attackerEOA
         vm.prank(attackerEOA);
         attacker = new Attacker(bank);
 
-        // Dem Attacker-Contract 1 ETH gutschreiben UND als Attacker einzahlen,
-        // damit balances[attacker] >= 1 ether ist (für den initialen Withdraw-Check)
+        // Fund attacker contract with 1 ETH AND deposit as attacker,
+        // so balances[attacker] >= 1 ether (needed for the initial withdraw check)
         vm.deal(address(attacker), 1 ether);
         vm.prank(address(attacker)); // msg.sender = attacker
         bank.deposit{value: 1 ether}();
@@ -33,7 +33,7 @@ contract ReentrancyTest is Test {
     function testExploitDrainsBank() public {
         uint256 beforeBal = address(bank).balance;
 
-        // Start des Angriffs
+        // Start the attack
         attacker.attack(1 ether);
 
         uint256 afterBal = address(bank).balance;
@@ -42,3 +42,4 @@ contract ReentrancyTest is Test {
         assertGt(attackerEOA.balance, 0, "attacker EOA should profit");
     }
 }
+
