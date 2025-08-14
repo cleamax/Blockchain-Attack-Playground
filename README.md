@@ -55,6 +55,8 @@ blockchain-attack-playground/
 └─ .github/
    └─ workflows/
       └─ ci.yml                    # CI: forge test
+```
+
 🚀 Getting Started
 1) Install Foundry
 bash
