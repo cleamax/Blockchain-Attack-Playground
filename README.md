@@ -8,7 +8,7 @@
 
 ---
 
-## 📖 About
+## 📖 About 
 The **Blockchain Attack Playground** demonstrates real-world vulnerabilities found in Ethereum smart contracts.
 
 Each challenge includes:
