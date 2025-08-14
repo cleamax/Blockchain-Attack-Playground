@@ -9,19 +9,19 @@ contract AccessControlTest is Test {
     AdminVault vault;
     Attacker attacker;
     address user = address(0xBEEF);
-    address payable attackerEOA = payable(address(0xA11CE)); // Ziel für sweep()
+    address payable attackerEOA = payable(address(0xA11CE)); // target for sweep()
 
     function setUp() public {
-        // Vault deployen und initial funden
+        // Deploy vault and initially fund it
         vault = new AdminVault{value: 5 ether}();
 
-        // Honest user schickt zusätzlich 3 ETH
+        // Honest user sends an additional 3 ETH
         vm.deal(user, 3 ether);
         vm.prank(user);
         (bool ok, ) = address(vault).call{value: 3 ether}("");
         require(ok, "funding fail");
 
-        // Attacker-Contract deployen; Owner = attackerEOA (empfängt spätere Auszahlung)
+        // Deploy attacker contract; Owner = attackerEOA (receives later payout)
         vm.prank(attackerEOA);
         attacker = new Attacker(vault);
     }
@@ -29,7 +29,7 @@ contract AccessControlTest is Test {
     function testExploitDrainsVault() public {
         uint256 beforeBal = address(vault).balance;
 
-        attacker.pwn(); // grantAdmin -> sweep zum attackerEOA
+        attacker.pwn(); // grantAdmin -> sweep to attackerEOA
 
         uint256 afterBal = address(vault).balance;
 
