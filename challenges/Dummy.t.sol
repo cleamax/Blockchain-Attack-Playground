@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.24;
 
-import "forge-std/Test.sol";
-
-contract Dummy is Test {
-    function test_ok() public {
-        assertTrue(true);
+// In Foundry reicht ein Contract mit Funktionen, die mit "test" anfangen.
+// Kein forge-std nötig.
+contract DummyTest {
+    function test_ok() public pure {
+        assert(true);
     }
 }
