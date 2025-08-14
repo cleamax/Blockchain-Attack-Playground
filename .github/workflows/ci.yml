@@ -3,7 +3,7 @@ name: CI
 on:
   push:
   pull_request:
-  workflow_dispatch: # erlaubt manuelles Starten im Actions-Tab
+  workflow_dispatch:
 
 jobs:
   ci:
@@ -14,49 +14,60 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # Node.js nur für solhint/prettier (Linting/Formatting)
-      - name: Setup Node.js
+      - name: Setup Node.js (for linters)
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      # Foundry installieren
       - name: Install Foundry
         uses: foundry-rs/foundry-toolchain@v1
         with:
           version: nightly
 
-      # Abhängigkeiten für Foundry-Projekte (forge-std) holen und bauen
+      # 🔧 Make forge install reliable in Actions
+      - name: Prepare workspace for forge
+        run: |
+          mkdir -p lib
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
+      # 📦 Install forge-std and build
       - name: Install Foundry deps & build
         run: |
           forge --version
-          forge install --no-commit foundry-rs/forge-std
+          # install only if not already present
+          if [ ! -d lib/forge-std ]; then
+            forge install --no-commit foundry-rs/forge-std
+          fi
           forge build
 
-      # Linters installieren
+      # 🔎 Linters
       - name: Install linters
         run: |
           npm install -g solhint prettier prettier-plugin-solidity
 
-      # Solidity-Lint (bricht bei Fehlern ab)
       - name: Run solhint
         run: solhint 'challenges/**/*.sol'
 
-      # Format-Check (bricht bei Abweichungen ab)
       - name: Run prettier check
         run: prettier --check 'challenges/**/*.sol'
 
-      # Unit-Tests
+      # ✅ Tests
       - name: Run tests
         run: forge test -vv
 
-      # Coverage erzeugen (LCOV) und als Artefakt hochladen
+      # 📈 Coverage
       - name: Run coverage
         run: forge coverage --report lcov
 
       - name: Upload coverage artifact
         uses: actions/upload-artifact@v4
         with:
+          name: lcov.info
+          path: lcov.info
+          if-no-files-found: error
+
           name: lcov.info
           path: lcov.info
           if-no-files-found: error
