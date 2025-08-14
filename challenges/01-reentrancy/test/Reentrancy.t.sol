@@ -9,28 +9,35 @@ contract ReentrancyTest is Test {
     SimpleBank bank;
     Attacker attacker;
     address user = address(0xBEEF);
+    address payable attackerEOA = payable(address(0xA11CE)); // bekommt am Ende das Geld
 
     function setUp() public {
         bank = new SimpleBank();
 
-        // Honest user deposits 5 ETH
+        // Honest user deposit: 5 ETH
         vm.deal(user, 5 ether);
         vm.prank(user);
         bank.deposit{value: 5 ether}();
 
-        // Prepare attacker: ensure attacker contract has a balance inside the bank
+        // Attacker-Contract deployen; Owner = attackerEOA
+        vm.prank(attackerEOA);
         attacker = new Attacker(bank);
+
+        // Dem Attacker-Contract 1 ETH gutschreiben UND als Attacker einzahlen
         vm.deal(address(attacker), 1 ether);
-        (bool ok, ) = address(bank).call{value: 1 ether}(abi.encodeWithSignature("deposit()"));
-        require(ok, "deposit failed");
+        vm.prank(address(attacker)); // msg.sender = attacker -> Balance wird dem Attacker gutgeschrieben
+        bank.deposit{value: 1 ether}();
     }
 
     function testExploitDrainsBank() public {
         uint256 beforeBal = address(bank).balance;
+
+        // Start des Angriffs (zieht reentrancy-Schleife)
         attacker.attack(1 ether);
+
         uint256 afterBal = address(bank).balance;
 
         assertLt(afterBal, beforeBal, "bank should be drained");
-        assertGt(address(attacker).balance, 0, "attacker should profit");
+        assertGt(attackerEOA.balance, 0, "attacker EOA should profit");
     }
 }
