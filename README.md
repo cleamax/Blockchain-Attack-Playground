@@ -35,7 +35,6 @@ Each challenge includes:
 ---
 
 ## 📂 Project Structure
-
 ```text
 blockchain-attack-playground/
 ├─ README.md
@@ -56,8 +55,6 @@ blockchain-attack-playground/
 └─ .github/
    └─ workflows/
       └─ ci.yml                    # CI: forge test
-
-````
 🚀 Getting Started
 1) Install Foundry
 bash
@@ -125,9 +122,6 @@ The CI workflow is defined in .github/workflows/ci.yml.
 
 📜 License
 MIT — free to use, modify, and share.
-
-## 💬 Contact
-Created by **Maximilian Richter** — aspiring Smart Contract Security Engineer.
 
 ## 💬 Contact
 Created by **Maximilian Richter** — aspiring Smart Contract Security Engineer.
