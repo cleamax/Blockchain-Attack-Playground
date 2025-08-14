@@ -24,32 +24,30 @@ contract OracleManipulationTest is Test {
         amm = new SimpleAMM(tokenA, tokenB);
         pool = new LendingPool(tokenA, tokenB, amm);
 
-        // Seed initial liquidity 1,000 A : 1,000 B
-        tokenA.mint(liquidityProvider, 1_000 ether);
-        tokenB.mint(liquidityProvider, 1_000 ether);
+        // ⚠️ Dünne Liquidität, damit die Preismanipulation stark wirkt: 10 A : 10 B
+        tokenA.mint(liquidityProvider, 10 ether);
+        tokenB.mint(liquidityProvider, 10 ether);
         vm.startPrank(liquidityProvider);
         tokenA.approve(address(amm), type(uint256).max);
         tokenB.approve(address(amm), type(uint256).max);
-        amm.addLiquidity(1_000 ether, 1_000 ether);
+        amm.addLiquidity(10 ether, 10 ether);
         vm.stopPrank();
 
-        // Fund the lending pool with B to borrow out (treasury)
+        // Pool mit B füllen, damit etwas zu leihen da ist
         tokenB.mint(address(pool), 800 ether);
 
-        // Deploy attacker contract controlled by attackerEOA and fund with B + a bit of A
+        // Angreifer-Contract deployen (Owner = attackerEOA) und mit B + etwas A versorgen
         vm.startPrank(attackerEOA);
         attacker = new OracleAttacker(tokenA, tokenB, amm, pool);
-        // Attacker starts with 900 B to manipulate price
-        tokenB.mint(address(attacker), 900 ether);
-        // Give attacker a tiny A so he can deposit after pumping the price
-        tokenA.mint(address(attacker), 1 ether);
+        tokenB.mint(address(attacker), 900 ether); // für Manipulation
+        tokenA.mint(address(attacker), 1 ether);   // kleines Collateral
         vm.stopPrank();
     }
 
     function testExploitOracleManipulation() public {
         uint256 poolBBefore = tokenB.balanceOf(address(pool));
 
-        // Manipulate with 900 B, deposit 1 A, borrow 700 B (drains most of pool)
+        // 900 B rein, 1 A als Collateral, 700 B leihen (sollte jetzt klappen)
         vm.prank(attackerEOA);
         attacker.execute(900 ether, 1 ether, 700 ether);
 
