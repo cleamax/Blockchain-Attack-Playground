@@ -9,12 +9,19 @@ contract SimpleBank {
         balances[msg.sender] += msg.value;
     }
 
-    // VULNERABLE: external call before state update
+    // VULNERABLE: external call before state update + unchecked subtraction
     function withdraw(uint256 amount) external {
         require(balances[msg.sender] >= amount, "insufficient");
-        (bool ok, ) = msg.sender.call{value: amount}("");
-        require(ok, "send fail");
-        balances[msg.sender] -= amount; // too late -> reentrancy possible
+
+        // ❌ CEI-Verstoß: externe Interaktion VOR dem State-Update
+        // Ignoriere den Rückgabewert, damit keine Reverts die Kaskade abbrechen.
+        (bool /*ok*/, ) = msg.sender.call{value: amount}("");
+
+        // ❌ In Solidity >=0.8 würde die mehrfache Subtraktion sonst revertieren.
+        // Für die Challenge erlauben wir Wrap-around (Demozweck).
+        unchecked {
+            balances[msg.sender] -= amount;
+        }
     }
 
     function bankBalance() external view returns (uint256) {
