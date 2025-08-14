@@ -125,6 +125,7 @@ The CI workflow is defined in .github/workflows/ci.yml.
 📜 License
 MIT — free to use, modify, and share.
 
+
 ## 💬 Contact
 Created by **Maximilian Richter** — aspiring Smart Contract Security Engineer.
 
