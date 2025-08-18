@@ -69,7 +69,7 @@ foundryup
 
 ### 2) Clone the repository
 ```bash
-git clone https://github.com/YOUR_GITHUB_USERNAME/blockchain-attack-playground.git
+git clone https://github.com/cleamax/blockchain-attack-playground.git
 cd blockchain-attack-playground
 ```
 
